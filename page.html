@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Секундомер</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        
+        .stopwatch {
+            text-align: center;
+        }
+        
+        .timer {
+            font-size: 800px;
+            font-weight: bold;
+            color: #ff0000;
+            line-height: 0.8;
+            font-variant-numeric: tabular-nums;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+        }
+        
+        /* Адаптация для iPad Air 2 (разрешение 2048x1536) */
+        @media (max-width: 2048px) and (max-height: 1536px) {
+            .timer {
+                font-size: 750px;
+            }
+        }
+        
+        /* Для портретной ориентации */
+        @media (max-width: 768px) and (orientation: portrait) {
+            .timer {
+                font-size: 600px;
+                line-height: 0.9;
+            }
+        }
+        
+        /* Для очень маленьких экранов */
+        @media (max-width: 480px) {
+            .timer {
+                font-size: 450px;
+                line-height: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stopwatch">
+        <div class="timer" id="timer">00</div>
+    </div>
+
+    <script>
+        let seconds = 0;
+        const timerElement = document.getElementById('timer');
+        
+        function updateTimer() {
+            // Обновляем секунды (от 0 до 59)
+            seconds = (seconds + 1) % 60;
+            
+            // Форматируем вывод с ведущим нулём
+            timerElement.textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        // Запускаем таймер - обновление каждую секунду
+        setInterval(updateTimer, 1000);
+        
+        // Начальная инициализация
+        updateTimer();
+    </script>
+</body>
+</html>
